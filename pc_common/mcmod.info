@@ -1,0 +1,20 @@
+[
+{
+  "modid": "PCraft",
+  "name": "PaleoCraft",
+  "description": "Find Fossiles and breed dinosaurs!!",
+  "version": "@VERSION@",
+  "url": "",
+  "updateUrl": "",
+  "authorList": [
+    "PaleoCrafter"
+  ],
+  "credits": "By PaleoCrafter",
+  "logoFile": "/mods/pcraft/textures/logo/logo.png",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]
