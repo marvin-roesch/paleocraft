@@ -10,10 +10,8 @@ package de.paleocrafter.pcraft.lib;
  */
 public class BlockIds {
     /* Default IDs */
-    public static final int FOSSILE_DEFAULT = 3220;
-    public static final int AMMONITE_DEFAULT = 3221;
+    public static final int ORE_DEFAULT = 3220;
     
     /* Custom IDs */
-    public static int FOSSILE;
-    public static int AMMONITE;
+    public static int ORE;
 }

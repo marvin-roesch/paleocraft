@@ -50,11 +50,8 @@ public class ConfigurationHandler {
                     ConfigurationSettings.ENABLE_SOUNDS_DEFAULT).getString();
 
             /* Block configs */
-            BlockIds.FOSSILE = configuration.getBlock(Strings.FOSSILE_NAME,
-                    BlockIds.FOSSILE_DEFAULT).getInt(BlockIds.FOSSILE_DEFAULT);
-            BlockIds.AMMONITE = configuration.getBlock(
-                    Strings.AMMONITE_BLOCK_NAME, BlockIds.AMMONITE_DEFAULT)
-                    .getInt(BlockIds.AMMONITE_DEFAULT);
+            BlockIds.ORE = configuration.getBlock("pcOre",
+                    BlockIds.ORE_DEFAULT).getInt(BlockIds.ORE_DEFAULT);
             /* Block property configs */
 
             /* Item configs */

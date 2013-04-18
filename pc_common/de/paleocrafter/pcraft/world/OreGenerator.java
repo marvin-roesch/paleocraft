@@ -32,7 +32,7 @@ public class OreGenerator implements IWorldGenerator {
             int fosY = random.nextInt(32);
             int fosZ = z + random.nextInt(16);
 
-            WorldGenMinable block = new WorldGenMinable(BlockIds.FOSSILE, 2);
+            WorldGenMinable block = new WorldGenMinable(BlockIds.ORE, 0, 2);
             block.generate(world, random, fosX, fosY, fosZ);
         }
         
@@ -44,7 +44,7 @@ public class OreGenerator implements IWorldGenerator {
             }
             int fosZ = z + random.nextInt(16);
 
-            WorldGenMinable block = new WorldGenMinable(BlockIds.AMMONITE, 2);
+            WorldGenMinable block = new WorldGenMinable(BlockIds.ORE, 1, 2);
             block.generate(world, random, fosX, fosY, fosZ);
         }
     }
