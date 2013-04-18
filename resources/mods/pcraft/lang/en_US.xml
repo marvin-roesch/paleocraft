@@ -2,5 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>German (de_DE) Localization File</comment>
-	<entry key="itemGroup.PC">PaleoCraft</entry>
+	<entry key="itemGroup.PCraft">PaleoCraft</entry>
+	<entry key="tile.pcFossile.name">Fossile</entry>
+	<entry key="tile.pcAmmoniteBlock.name">Ammonite Ore</entry>
+	<entry key="item.pcAmmoniteItem.name">Ammonite</entry>
 </properties>
