@@ -1,4 +1,4 @@
-package de.paleocrafter.pcraft.block.itemblock;
+package de.paleocrafter.pcraft.item;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -34,21 +34,11 @@ public class OreItemBlock extends ItemBlock {
     
     @Override
     public String getUnlocalizedName(ItemStack is) {
-        return Strings.ORE_NAME + "." + subNames[is.getItemDamage()];
+        return "block." + Strings.ORE_NAME + "." + subNames[is.getItemDamage()];
     }
     
     @Override
     public int getMetadata (int damageValue) {
         return damageValue;
-    }
-    
-    @Override
-    @SideOnly(Side.CLIENT)
-    public Icon getIconFromDamage(int dmg) {
-        if(dmg == 0) {
-            return BlockOrePC.fosFront;
-        } else {
-            return BlockOrePC.ammonite;
-        }
     }
 }

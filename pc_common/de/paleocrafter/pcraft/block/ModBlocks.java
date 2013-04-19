@@ -1,7 +1,7 @@
 package de.paleocrafter.pcraft.block;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import de.paleocrafter.pcraft.block.itemblock.OreItemBlock;
+import de.paleocrafter.pcraft.item.OreItemBlock;
 import de.paleocrafter.pcraft.lib.BlockIds;
 import de.paleocrafter.pcraft.lib.Strings;
 import net.minecraft.block.Block;
