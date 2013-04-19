@@ -1,17 +1,8 @@
 package de.paleocrafter.pcraft.item;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import de.paleocrafter.pcraft.block.BlockOrePC;
-import de.paleocrafter.pcraft.block.ModBlocks;
-import de.paleocrafter.pcraft.core.helpers.LocalizationHelper;
-import de.paleocrafter.pcraft.lib.Reference;
 import de.paleocrafter.pcraft.lib.Strings;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
 
 /**
  * PaleoCraft
