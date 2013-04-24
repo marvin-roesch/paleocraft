@@ -5,7 +5,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
-import de.paleocrafter.pcraft.tileentity.TileEntityFossile;
+import de.paleocrafter.pcraft.tileentity.TileEntityFossil;
 
 public class CommonProxy implements IGuiHandler {
 
@@ -34,8 +34,8 @@ public class CommonProxy implements IGuiHandler {
     }
 
     public void registerTileEntities() {
-        GameRegistry.registerTileEntity(TileEntityFossile.class,
-                "TileEntityFossile");
+        GameRegistry.registerTileEntity(TileEntityFossil.class,
+                "TileEntityFossil");
     }
 
     public void sendRequestEventPacket(byte eventType, int originX,

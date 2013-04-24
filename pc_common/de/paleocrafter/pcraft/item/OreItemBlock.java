@@ -24,7 +24,7 @@ import net.minecraft.util.Icon;
 public class OreItemBlock extends ItemBlock {
     
     private final static String[] subNames = {
-        Strings.FOSSILE_NAME, Strings.AMMONITE_BLOCK_NAME
+        Strings.FOSSIL_NAME, Strings.AMMONITE_BLOCK_NAME
     };
     
     public OreItemBlock(int id) {

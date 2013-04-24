@@ -3,7 +3,7 @@
 <properties version="1.0">
 	<comment>German (de_DE) Localization File</comment>
 	<entry key="itemGroup.PCraft">PaleoCraft</entry>
-	<entry key="block.pcOre.fossile.name">Fossile</entry>
+	<entry key="block.pcOre.fossil.name">Fossil</entry>
 	<entry key="block.pcOre.ammoniteBlock.name">Ammonite Ore</entry>
 	<entry key="item.pcAmmoniteItem.name">Ammonite</entry>
 </properties>
