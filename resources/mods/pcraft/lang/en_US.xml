@@ -3,7 +3,8 @@
 <properties version="1.0">
 	<comment>American English (en_US) Localization File</comment>
 	<entry key="itemGroup.PCraft">PaleoCraft</entry>
-	<entry key="block.pcOre.fossile.name">Fossile</entry>
-	<entry key="block.pcOre.ammoniteBlock.name">Ammonite Ore</entry>
-	<entry key="item.pcAmmoniteItem.name">Ammonite</entry>
+	<entry key="tile.dinoEgg.name">Dino Egg</entry>
+	<entry key="block.ore.fossile.name">Fossile</entry>
+	<entry key="block.ore.ammonite.name">Ammonite Ore</entry>
+	<entry key="item.ammonite.name">Ammonite</entry>
 </properties>

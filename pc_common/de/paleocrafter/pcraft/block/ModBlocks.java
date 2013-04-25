@@ -17,10 +17,13 @@ import net.minecraft.block.Block;
 public class ModBlocks {
     /* Mod block instances */
     public static Block pcOre;
+    public static Block egg;
     
     public static void init() {
         pcOre = new BlockOrePC(BlockIds.ORE);
+        egg = new BlockDinoEgg(BlockIds.EGG);
         
+        GameRegistry.registerBlock(egg, Strings.EGG_NAME);
         GameRegistry.registerBlock(pcOre, OreItemBlock.class, Strings.ORE_NAME);
     }
 }

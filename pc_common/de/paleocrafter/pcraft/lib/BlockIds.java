@@ -11,7 +11,9 @@ package de.paleocrafter.pcraft.lib;
 public class BlockIds {
     /* Default IDs */
     public static final int ORE_DEFAULT = 3220;
+    public static final int EGG_DEFAULT = 3221;
     
     /* Custom IDs */
     public static int ORE;
+    public static int EGG;
 }

@@ -36,9 +36,9 @@ public class CommonProxy implements IGuiHandler {
 
     public void registerTileEntities() {
         GameRegistry.registerTileEntity(TileFossil.class,
-                "TileFossil");
+                "tileFossil");
         GameRegistry.registerTileEntity(TileDinoEgg.class,
-                "TileDinoEgg");
+                "tileDinoEgg");
     }
 
     public void sendRequestEventPacket(byte eventType, int originX,

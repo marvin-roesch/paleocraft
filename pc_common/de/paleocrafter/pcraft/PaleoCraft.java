@@ -64,5 +64,6 @@ public class PaleoCraft {
     @Init
     public void load(FMLInitializationEvent event) {
         proxy.registerTileEntities();
+        proxy.initRenderingAndTextures();
     }
 }

@@ -50,8 +50,10 @@ public class ConfigurationHandler {
                     ConfigurationSettings.ENABLE_SOUNDS_DEFAULT).getString();
 
             /* Block configs */
-            BlockIds.ORE = configuration.getBlock("pcOre",
+            BlockIds.ORE = configuration.getBlock("ore",
                     BlockIds.ORE_DEFAULT).getInt(BlockIds.ORE_DEFAULT);
+            BlockIds.EGG = configuration.getBlock("egg",
+                    BlockIds.EGG_DEFAULT).getInt(BlockIds.EGG_DEFAULT);
             /* Block property configs */
 
             /* Item configs */
