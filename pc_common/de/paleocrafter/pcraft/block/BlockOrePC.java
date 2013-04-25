@@ -10,7 +10,7 @@ import de.paleocrafter.pcraft.item.ModItems;
 import de.paleocrafter.pcraft.lib.BlockIds;
 import de.paleocrafter.pcraft.lib.Reference;
 import de.paleocrafter.pcraft.lib.Strings;
-import de.paleocrafter.pcraft.tileentity.TileEntityFossil;
+import de.paleocrafter.pcraft.tileentity.TileEntityFossile;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -132,9 +132,9 @@ public class BlockOrePC extends Block {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
         fosFront = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase()
-                + ":fossilFront");
+                + ":fossileFront");
         fosSides = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase()
-                + ":fossilSides");
+                + ":fossileSides");
         ammonite = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase()
                 + ":ammoniteBlock");
     }
@@ -145,7 +145,7 @@ public class BlockOrePC extends Block {
             int side) {
         switch (access.getBlockMetadata(x, y, z)) {
             case 0:
-                TileEntityFossil tileEntity = (TileEntityFossil) access
+                TileEntityFossile tileEntity = (TileEntityFossile) access
                         .getBlockTileEntity(x, y, z);
                 if (tileEntity != null) {
                     if (side == tileEntity.getFrontSide()) {
@@ -176,7 +176,7 @@ public class BlockOrePC extends Block {
     @Override
     public TileEntity createTileEntity(World world, int meta) {
         if (meta == 0) {
-            return new TileEntityFossil();
+            return new TileEntityFossile();
         }
         return null;
     }
