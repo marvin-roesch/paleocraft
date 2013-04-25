@@ -6,11 +6,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityFossile extends TileEntityPC {
+public class TileFossil extends TileEntity {
     private int frontSide;
 
-    public TileEntityFossile() {
+    public TileFossil() {
         super();
         frontSide = new Random().nextInt(5);
     }
