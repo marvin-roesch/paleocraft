@@ -4,7 +4,7 @@
 	<comment>German (de_DE) Localization File</comment>
 	<entry key="itemGroup.PCraft">PaleoCraft</entry>
 	<entry key="tile.dinoEgg.name">Dinoei</entry>
-	<entry key="block.ore.fossile.name">Fossil</entry>
+	<entry key="block.ore.fossil.name">Fossil</entry>
 	<entry key="block.ore.ammonite.name">Ammonitenerz</entry>
 	<entry key="item.ammonite.name">Ammonit</entry>
 </properties>
