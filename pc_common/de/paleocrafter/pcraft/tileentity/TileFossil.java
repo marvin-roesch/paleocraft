@@ -2,58 +2,19 @@ package de.paleocrafter.pcraft.tileentity;
 
 import java.util.Random;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
-import net.minecraft.tileentity.TileEntity;
-
-public class TileFossil extends TileEntity {
-    private int frontSide;
+public class TileFossil extends TilePC {
+    private boolean initialized;
 
     public TileFossil() {
         super();
-        frontSide = new Random().nextInt(5);
     }
 
-    public int getFrontSide() {
-        return frontSide;
+    public void init() {
+        this.setOrientation(new Random().nextInt(5));
+        initialized = true;
     }
 
-    @Override
-    public void readFromNBT(NBTTagCompound tagCompound) {
-        super.readFromNBT(tagCompound);
-        loadInfoFromNBT(tagCompound);
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound tagCompound) {
-        super.writeToNBT(tagCompound);
-        addInfoToNBT(tagCompound);
-    }
-    
-    public void loadInfoFromNBT(NBTTagCompound tagCompound) {
-        frontSide = tagCompound.getInteger("fossileFrontSide");
-    }
-
-    public void addInfoToNBT(NBTTagCompound tagCompound) {
-        tagCompound.setInteger("fossileFrontSide", frontSide);
-    }
-    
-    @Override
-    public Packet getDescriptionPacket() {
-        Packet132TileEntityData packet = (Packet132TileEntityData) super.getDescriptionPacket();
-        NBTTagCompound tag = packet != null ? packet.customParam1 : new NBTTagCompound();
-
-        addInfoToNBT(tag);
-
-        return new Packet132TileEntityData(xCoord, yCoord, zCoord, 1, tag);
-    }
-
-    @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
-        super.onDataPacket(net, pkt);
-        NBTTagCompound tag = pkt.customParam1;
-        loadInfoFromNBT(tag);
+    public boolean isInitialized() {
+        return initialized;
     }
 }

@@ -44,7 +44,6 @@ public class PacketTileUpdate extends PacketPC {
 
     @Override
     public void writeData(DataOutputStream data) throws IOException {
-
         data.writeInt(x);
         data.writeInt(y);
         data.writeInt(z);
@@ -55,7 +54,6 @@ public class PacketTileUpdate extends PacketPC {
 
     @Override
     public void readData(DataInputStream data) throws IOException {
-
         x = data.readInt();
         y = data.readInt();
         z = data.readInt();

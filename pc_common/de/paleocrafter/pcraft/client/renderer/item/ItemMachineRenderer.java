@@ -69,7 +69,7 @@ public class ItemMachineRenderer implements IItemRenderer {
         GL11.glTranslatef(x, y, z); // size
         GL11.glRotatef(180, 1, 0, 0);
         GL11.glRotatef(90, 0, 1, 0);
-        modelAnalyzer.renderAll();
+        modelAnalyzer.renderAll(0);
         GL11.glPopMatrix(); // end
     }
 }

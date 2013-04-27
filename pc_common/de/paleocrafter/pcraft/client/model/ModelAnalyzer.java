@@ -17,6 +17,7 @@ public class ModelAnalyzer extends ModelBase {
     ModelRenderer Pane4;
     ModelRenderer Controls;
     ModelRenderer LaserBase;
+    ModelRenderer Progress;
 
     public ModelAnalyzer() {
         textureWidth = 64;
@@ -82,9 +83,13 @@ public class ModelAnalyzer extends ModelBase {
         Pane4.setTextureSize(64, 64);
         Pane4.mirror = true;
         setRotation(Pane4, 0F, 0F, 0F);
-        Controls = new ModelRenderer(this, 0, 18);
-        Controls.addBox(-2F, 0F, 0F, 3, 11, 1);
-        Controls.setRotationPoint(-3F, 11F, 6F);
+        Controls = new ModelRenderer(this, 44, 37);
+        Controls.addBox(-2F, 0F, 0F, 1, 11, 2);
+        Controls.addBox(-1F, 0F, 0F, 1, 11, 1);
+        Controls.addBox(-1F, 0F, 0F, 1, 1, 2);
+        Controls.addBox(-1F, 10F, 0F, 1, 1, 2);
+        Controls.addBox(0F, 0F, 0F, 1, 11, 2);
+        Controls.setRotationPoint(-3F, 11F, 5F);
         Controls.setTextureSize(64, 64);
         Controls.mirror = true;
         setRotation(Controls, 0F, 0F, 0F);
@@ -94,9 +99,16 @@ public class ModelAnalyzer extends ModelBase {
         LaserBase.setTextureSize(64, 64);
         LaserBase.mirror = true;
         setRotation(LaserBase, 0F, 0F, 0F);
+        Progress = new ModelRenderer(this, 5, 19);
+        Progress.addBox(0F, 0F, 0F, 1, 9, 1);
+        Progress.setRotationPoint(-4F, 12F, 6F);
+        Progress.setTextureSize(64, 64);
+        Progress.mirror = true;
+        setRotation(Progress, 0F, 0F, 0F);
+        //Controls.addChild(Progress);
     }
 
-    public void renderAll() {
+    public void renderAll(int progress) {
         Base.render(0.0625F);
         Pillar1.render(0.0625F);
         Pillar2.render(0.0625F);
@@ -104,11 +116,27 @@ public class ModelAnalyzer extends ModelBase {
         Pillar4.render(0.0625F);
         Top.render(0.0625F);
         Pane1.render(0.0625F);
-        Controls.render(0.0625F);
         Pane2.render(0.0625F);
         Pane3.render(0.0625F);
         Pane4.render(0.0625F);
+        refreshProgress(progress);
+        Progress.render(0.0625F);
+        Controls.render(0.0625F);
+        Progress.setTextureOffset(5, 19);
         LaserBase.render(0.0625F);
+    }
+    
+    private void refreshProgress(int progress) {
+        if(progress > 6)
+            progress = 6;
+        else if(progress < 0)
+            progress = 0;
+        Progress = new ModelRenderer(this, 5 + progress, 19);
+        Progress.addBox(0F, 0F, 0F, 1, 9, 1);
+        Progress.setRotationPoint(-4F, 12F, 6F);
+        Progress.setTextureSize(64, 64);
+        Progress.mirror = true;
+        setRotation(Progress, 0F, 0F, 0F);
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z) {

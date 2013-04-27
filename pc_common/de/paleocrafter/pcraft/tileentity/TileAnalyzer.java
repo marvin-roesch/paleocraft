@@ -92,7 +92,6 @@ public class TileAnalyzer extends TilePC implements IInventory {
 
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
-
         super.readFromNBT(nbtTagCompound);
 
         // Read in the ItemStacks in the inventory from NBT

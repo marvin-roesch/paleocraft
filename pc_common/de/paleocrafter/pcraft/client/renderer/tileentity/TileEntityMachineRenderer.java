@@ -45,10 +45,7 @@ public class TileEntityMachineRenderer extends TileEntitySpecialRenderer {
         GL11.glScalef(1.0F, -1.0F, -1.0F);
         GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 
-        ForgeDirection direction = null;
-        if (te.getWorldObj() != null) {
-            direction = te.getOrientation();
-        }
+        ForgeDirection direction = te.getOrientation();
         short angle = 0;
 
         if (direction != null) {
@@ -67,7 +64,7 @@ public class TileEntityMachineRenderer extends TileEntitySpecialRenderer {
 
         FMLClientHandler.instance().getClient().renderEngine
                 .bindTexture(Textures.TEXTURE_ANALYZER);
-        modelAnalyzer.renderAll();
+        modelAnalyzer.renderAll(4);
 
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPopMatrix();

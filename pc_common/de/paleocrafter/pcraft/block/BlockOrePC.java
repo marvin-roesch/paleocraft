@@ -10,10 +10,10 @@ import de.paleocrafter.pcraft.item.ModItems;
 import de.paleocrafter.pcraft.lib.Reference;
 import de.paleocrafter.pcraft.lib.Strings;
 import de.paleocrafter.pcraft.tileentity.TileFossil;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -30,7 +30,7 @@ import net.minecraft.world.World;
  * @author PaleoCrafter
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class BlockOrePC extends Block {
+public class BlockOrePC extends BlockPC {
 
     // Fossile vars
     @SideOnly(Side.CLIENT)
@@ -50,9 +50,25 @@ public class BlockOrePC extends Block {
     }
 
     @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z,
+            EntityLiving entity, ItemStack is) {
+        if (is.getItemDamage() == 0) {
+            TileFossil te = (TileFossil) world.getBlockTileEntity(x, y, z);
+            if (!te.isInitialized()) {
+                te.init();
+                world.markBlockForRenderUpdate(x, y, z);
+            }
+        }
+    }
+
+    @Override
     public void onBlockAdded(World world, int x, int y, int z) {
+        TileFossil te = (TileFossil) world.getBlockTileEntity(x, y, z);
         if (world.getBlockMetadata(x, y, z) == 0) {
-            world.markBlockForUpdate(x, y, z);
+            if (!te.isInitialized()) {
+                te.init();
+                world.markBlockForRenderUpdate(x, y, z);
+            }
         }
     }
 
@@ -148,10 +164,10 @@ public class BlockOrePC extends Block {
             int side) {
         switch (access.getBlockMetadata(x, y, z)) {
             case 0:
-                TileFossil tileEntity = (TileFossil) access
-                        .getBlockTileEntity(x, y, z);
+                TileFossil tileEntity = (TileFossil) access.getBlockTileEntity(
+                        x, y, z);
                 if (tileEntity != null) {
-                    if (side == tileEntity.getFrontSide()) {
+                    if (side == tileEntity.getOrientation().ordinal()) {
                         return fosFront;
                     }
                 }

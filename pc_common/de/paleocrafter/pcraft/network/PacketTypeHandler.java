@@ -24,7 +24,6 @@ public enum PacketTypeHandler {
     private Class<? extends PacketPC> clazz;
 
     PacketTypeHandler(Class<? extends PacketPC> clazz) {
-
         this.clazz = clazz;
     }
 

@@ -5,7 +5,9 @@ import de.paleocrafter.pcraft.network.PacketTypeHandler;
 import de.paleocrafter.pcraft.network.packet.PacketTileUpdate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -67,10 +69,9 @@ public class TilePC extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
         super.readFromNBT(nbtTagCompound);
-
         if (nbtTagCompound.hasKey(Strings.NBT_TE_DIRECTION)) {
-            orientation = ForgeDirection.getOrientation(nbtTagCompound
-                    .getByte(Strings.NBT_TE_DIRECTION));
+            this.setOrientation(ForgeDirection.getOrientation(nbtTagCompound
+                    .getByte(Strings.NBT_TE_DIRECTION)));
         }
 
         if (nbtTagCompound.hasKey(Strings.NBT_TE_STATE)) {
@@ -100,4 +101,5 @@ public class TilePC extends TileEntity {
         return PacketTypeHandler.populatePacket(new PacketTileUpdate(xCoord,
                 yCoord, zCoord, orientation, state, customName));
     }
+
 }
