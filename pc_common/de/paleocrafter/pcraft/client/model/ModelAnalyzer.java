@@ -93,7 +93,7 @@ public class ModelAnalyzer extends ModelBase {
         Controls.setTextureSize(64, 64);
         Controls.mirror = true;
         setRotation(Controls, 0F, 0F, 0F);
-        LaserBase = new ModelRenderer(this, -1, 0);
+        LaserBase = new ModelRenderer(this, 0, 0);
         LaserBase.addBox(-2F, 0F, -2F, 4, 1, 4);
         LaserBase.setRotationPoint(0F, 11F, 0F);
         LaserBase.setTextureSize(64, 64);
@@ -105,7 +105,6 @@ public class ModelAnalyzer extends ModelBase {
         Progress.setTextureSize(64, 64);
         Progress.mirror = true;
         setRotation(Progress, 0F, 0F, 0F);
-        //Controls.addChild(Progress);
     }
 
     public void renderAll(int progress) {

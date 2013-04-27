@@ -5,6 +5,7 @@ import java.util.List;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.paleocrafter.pcraft.PaleoCraft;
+import de.paleocrafter.pcraft.lib.GuiIds;
 import de.paleocrafter.pcraft.lib.RenderIds;
 import de.paleocrafter.pcraft.lib.Strings;
 import de.paleocrafter.pcraft.tileentity.TileAnalyzer;
@@ -12,6 +13,7 @@ import de.paleocrafter.pcraft.tileentity.TilePC;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
@@ -32,6 +34,29 @@ public class BlockMachines extends BlockPC {
         super(id, Material.iron);
         this.setCreativeTab(PaleoCraft.tabsPC);
         this.setUnlocalizedName(Strings.MACHINES_NAME);
+    }
+
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z,
+            EntityPlayer player, int par6, float par7, float par8, float par9) {
+        if (player.isSneaking())
+            return true;
+        else {
+            if (!world.isRemote) {
+                switch (world.getBlockMetadata(x, y, z)) {
+                    case 0:
+                        TileAnalyzer te = (TileAnalyzer) world
+                                .getBlockTileEntity(x, y, z);
+                        if (te != null) {
+                            player.openGui(PaleoCraft.instance,
+                                    GuiIds.ANALYZER, world, x, y, z);
+                        }
+                        break;
+                }
+            }
+
+            return true;
+        }
     }
 
     @Override

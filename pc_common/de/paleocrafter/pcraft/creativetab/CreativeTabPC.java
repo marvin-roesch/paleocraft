@@ -2,6 +2,7 @@ package de.paleocrafter.pcraft.creativetab;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import de.paleocrafter.pcraft.lib.BlockIds;
 import net.minecraft.creativetab.CreativeTabs;
 
 /**
@@ -20,7 +21,6 @@ public class CreativeTabPC extends CreativeTabs {
      * the itemID for the item to be displayed on the tab
      */
     public int getTabIconItemIndex() {
-
-        return 1;
+        return BlockIds.EGG;
     }
 }

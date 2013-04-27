@@ -7,6 +7,7 @@ import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import de.paleocrafter.pcraft.client.renderer.item.ItemDinoEggRenderer;
 import de.paleocrafter.pcraft.client.renderer.item.ItemMachineRenderer;
 import de.paleocrafter.pcraft.client.renderer.tileentity.TileEntityDinoEggRenderer;
 import de.paleocrafter.pcraft.client.renderer.tileentity.TileEntityMachineRenderer;
@@ -27,6 +28,8 @@ public class ClientProxy extends CommonProxy {
         ItemMachineRenderer render = new ItemMachineRenderer();
 
         MinecraftForgeClient.registerItemRenderer(BlockIds.MACHINES, render);
+        MinecraftForgeClient.registerItemRenderer(BlockIds.EGG,
+                new ItemDinoEggRenderer());
     }
 
     @Override

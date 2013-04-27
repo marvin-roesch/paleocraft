@@ -5,6 +5,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import de.paleocrafter.pcraft.client.gui.inventory.GuiAnalyzer;
+import de.paleocrafter.pcraft.inventory.ContainerAnalyzer;
+import de.paleocrafter.pcraft.lib.GuiIds;
 import de.paleocrafter.pcraft.tileentity.TileAnalyzer;
 import de.paleocrafter.pcraft.tileentity.TileDinoEgg;
 import de.paleocrafter.pcraft.tileentity.TileFossil;
@@ -36,12 +39,9 @@ public class CommonProxy implements IGuiHandler {
     }
 
     public void registerTileEntities() {
-        GameRegistry.registerTileEntity(TileFossil.class,
-                "tileFossil");
-        GameRegistry.registerTileEntity(TileDinoEgg.class,
-                "tileDinoEgg");
-        GameRegistry.registerTileEntity(TileAnalyzer.class,
-                "tileAnalyzer");
+        GameRegistry.registerTileEntity(TileFossil.class, "tileFossil");
+        GameRegistry.registerTileEntity(TileDinoEgg.class, "tileDinoEgg");
+        GameRegistry.registerTileEntity(TileAnalyzer.class, "tileAnalyzer");
     }
 
     public void sendRequestEventPacket(byte eventType, int originX,
@@ -58,14 +58,22 @@ public class CommonProxy implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world,
             int x, int y, int z) {
-
+        if (ID == GuiIds.ANALYZER) {
+            TileAnalyzer tileAnalyzer = (TileAnalyzer) world
+                    .getBlockTileEntity(x, y, z);
+            return new ContainerAnalyzer(player.inventory, tileAnalyzer);
+        }
         return null;
     }
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world,
             int x, int y, int z) {
-
+        if (ID == GuiIds.ANALYZER) {
+            TileAnalyzer tileAnalyzer = (TileAnalyzer) world
+                    .getBlockTileEntity(x, y, z);
+            return new GuiAnalyzer(player.inventory, tileAnalyzer);
+        }
         return null;
     }
 

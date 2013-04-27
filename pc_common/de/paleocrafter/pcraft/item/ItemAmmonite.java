@@ -16,9 +16,9 @@ import net.minecraft.item.Item;
  * @author PaleoCrafter
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class AmmoniteItem extends Item {
+public class ItemAmmonite extends Item {
 
-    public AmmoniteItem(int id) {
+    public ItemAmmonite(int id) {
         super(id);
         this.setCreativeTab(PaleoCraft.tabsPC);
         this.setMaxStackSize(64);

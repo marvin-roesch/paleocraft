@@ -15,9 +15,12 @@ import net.minecraft.nbt.NBTTagList;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class TileAnalyzer extends TilePC implements IInventory {
+    private float laserRotX;
+    private float laserRotZ;
+    
     private ItemStack[] inventory;
 
-    private final int INVENTORY_SIZE = 2;
+    private final int INVENTORY_SIZE = 3;
 
     public static final int INPUT_INVENTORY_INDEX = 0;
     public static final int OUTPUT_INVENTORY_INDEX = 1;
@@ -132,6 +135,34 @@ public class TileAnalyzer extends TilePC implements IInventory {
     @Override
     public boolean isStackValidForSlot(int i, ItemStack itemstack) {
         return true;
+    }
+
+    /**
+     * @return the laserRotX
+     */
+    public float getLaserRotX() {
+        return laserRotX;
+    }
+
+    /**
+     * @param laserRotX the laserRotX to set
+     */
+    public void setLaserRotX(float laserRotX) {
+        this.laserRotX = laserRotX;
+    }
+
+    /**
+     * @return the laserRotZ
+     */
+    public float getLaserRotZ() {
+        return laserRotZ;
+    }
+
+    /**
+     * @param laserRotZ the laserRotZ to set
+     */
+    public void setLaserRotZ(float laserRotZ) {
+        this.laserRotZ = laserRotZ;
     }
 
 }

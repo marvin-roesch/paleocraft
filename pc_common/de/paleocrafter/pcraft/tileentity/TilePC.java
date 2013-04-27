@@ -5,9 +5,7 @@ import de.paleocrafter.pcraft.network.PacketTypeHandler;
 import de.paleocrafter.pcraft.network.packet.PacketTileUpdate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 

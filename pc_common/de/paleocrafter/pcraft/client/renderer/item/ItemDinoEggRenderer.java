@@ -7,23 +7,23 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import de.paleocrafter.pcraft.client.model.ModelAnalyzer;
+import de.paleocrafter.pcraft.client.model.ModelDinoEgg;
 import de.paleocrafter.pcraft.lib.Textures;
 
 /**
  * PaleoCraft
  * 
- * ItemMachineRenderer
+ * ItemDinoEggRenderer
  * 
  * @author PaleoCrafter
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 @SideOnly(Side.CLIENT)
-public class ItemMachineRenderer implements IItemRenderer {
-    private ModelAnalyzer modelAnalyzer;
+public class ItemDinoEggRenderer implements IItemRenderer {
+    private ModelDinoEgg modelDinoEgg;
 
-    public ItemMachineRenderer() {
-        modelAnalyzer = new ModelAnalyzer();
+    public ItemDinoEggRenderer() {
+        modelDinoEgg = new ModelDinoEgg();
     }
 
     @Override
@@ -42,18 +42,15 @@ public class ItemMachineRenderer implements IItemRenderer {
 
         switch (type) {
             case ENTITY: {
-                if (item.getItemDamage() == 0)
-                    renderAnalyzer(0.5F, 1.0F, 0.5F);
+                renderEgg(0.5F, 1.0F, 0.5F);
                 break;
             }
             case EQUIPPED: {
-                if (item.getItemDamage() == 0)
-                    renderAnalyzer(0.5F, 1.5F, 0.5F);
+                renderEgg(0.5F, 1.5F, 0.5F);
                 break;
             }
             case INVENTORY: {
-                if (item.getItemDamage() == 0)
-                    renderAnalyzer(0.0F, 1.0F, 0.0F);
+                renderEgg(0.0F, 1.0F, 0.0F);
                 break;
             }
             default:
@@ -61,15 +58,15 @@ public class ItemMachineRenderer implements IItemRenderer {
         }
     }
 
-    private void renderAnalyzer(float x, float y, float z) {
+    private void renderEgg(float x, float y, float z) {
 
         FMLClientHandler.instance().getClient().renderEngine
-                .bindTexture(Textures.MODEL_ANALYZER);
+                .bindTexture(Textures.MODEL_EGG);
         GL11.glPushMatrix(); // start
         GL11.glTranslatef(x, y, z); // size
         GL11.glRotatef(180, 1, 0, 0);
         GL11.glRotatef(90, 0, 1, 0);
-        modelAnalyzer.renderAll(0);
+        modelDinoEgg.renderAll();
         GL11.glPopMatrix(); // end
     }
 }

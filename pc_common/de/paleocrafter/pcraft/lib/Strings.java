@@ -15,6 +15,7 @@ public class Strings {
     public static final String AMMONITE_ITEM_NAME = "ammonite";
     
     /* Inventory names */
+    public static final String INV_NAME = "container.inventory";
     public static final String INV_ANALYZER_NAME = "container.analyzer";
     
     /* Tile Entity NBT keys */
