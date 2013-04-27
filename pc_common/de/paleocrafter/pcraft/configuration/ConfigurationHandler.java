@@ -54,6 +54,8 @@ public class ConfigurationHandler {
                     BlockIds.ORE_DEFAULT).getInt(BlockIds.ORE_DEFAULT);
             BlockIds.EGG = configuration.getBlock("egg",
                     BlockIds.EGG_DEFAULT).getInt(BlockIds.EGG_DEFAULT);
+            BlockIds.MACHINES = configuration.getBlock("machines",
+                    BlockIds.MACHINES_DEFAULT).getInt(BlockIds.MACHINES_DEFAULT);
             /* Block property configs */
 
             /* Item configs */

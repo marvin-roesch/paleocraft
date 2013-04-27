@@ -7,7 +7,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.paleocrafter.pcraft.PaleoCraft;
 import de.paleocrafter.pcraft.item.ModItems;
-import de.paleocrafter.pcraft.lib.BlockIds;
 import de.paleocrafter.pcraft.lib.Reference;
 import de.paleocrafter.pcraft.lib.Strings;
 import de.paleocrafter.pcraft.tileentity.TileFossil;
@@ -53,7 +52,7 @@ public class BlockOrePC extends Block {
     @Override
     public void onBlockAdded(World world, int x, int y, int z) {
         if (world.getBlockMetadata(x, y, z) == 0) {
-            world.notifyBlockChange(x, y, z, BlockIds.ORE);
+            world.markBlockForUpdate(x, y, z);
         }
     }
 
@@ -124,6 +123,7 @@ public class BlockOrePC extends Block {
         return 0;
     }
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(int unknown, CreativeTabs tab, List subItems) {

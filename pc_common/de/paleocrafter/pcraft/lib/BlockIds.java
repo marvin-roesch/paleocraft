@@ -12,8 +12,10 @@ public class BlockIds {
     /* Default IDs */
     public static final int ORE_DEFAULT = 3220;
     public static final int EGG_DEFAULT = 3221;
+    public static final int MACHINES_DEFAULT = 3222;
     
     /* Custom IDs */
     public static int ORE;
     public static int EGG;
+    public static int MACHINES;
 }

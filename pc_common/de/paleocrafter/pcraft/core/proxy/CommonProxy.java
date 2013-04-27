@@ -5,6 +5,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import de.paleocrafter.pcraft.tileentity.TileAnalyzer;
 import de.paleocrafter.pcraft.tileentity.TileDinoEgg;
 import de.paleocrafter.pcraft.tileentity.TileFossil;
 
@@ -39,6 +40,8 @@ public class CommonProxy implements IGuiHandler {
                 "tileFossil");
         GameRegistry.registerTileEntity(TileDinoEgg.class,
                 "tileDinoEgg");
+        GameRegistry.registerTileEntity(TileAnalyzer.class,
+                "tileAnalyzer");
     }
 
     public void sendRequestEventPacket(byte eventType, int originX,

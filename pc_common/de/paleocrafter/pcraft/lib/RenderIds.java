@@ -10,4 +10,5 @@ package de.paleocrafter.pcraft.lib;
  */
 public class RenderIds {
     public static int dinoEggRenderId;
+    public static int machineRenderId;
 }
