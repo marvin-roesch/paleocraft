@@ -76,7 +76,7 @@ public class TileEntityMachineRenderer extends TileEntitySpecialRenderer {
         ModelRenderer laser = new ModelRenderer(modelAnalyzer, 0, 0);
         laser.addBox(0F, 11F, 0F, 1, 12, 1);
         laser.setRotationPoint(0F, 0F, 0F);
-        if (delta >= 0.8) {
+        if (delta >= 0.9F) {
             Random rand = new Random();
             float val = 1F;
             float rotX = 0;
