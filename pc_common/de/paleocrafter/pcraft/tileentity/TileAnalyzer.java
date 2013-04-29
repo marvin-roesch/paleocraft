@@ -1,5 +1,6 @@
 package de.paleocrafter.pcraft.tileentity;
 
+import de.paleocrafter.pcraft.item.ModItems;
 import de.paleocrafter.pcraft.lib.Strings;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -17,7 +18,7 @@ import net.minecraft.nbt.NBTTagList;
 public class TileAnalyzer extends TilePC implements IInventory {
     private float laserRotX;
     private float laserRotZ;
-    
+
     private ItemStack[] inventory;
 
     private final int INVENTORY_SIZE = 3;
@@ -28,6 +29,75 @@ public class TileAnalyzer extends TilePC implements IInventory {
     public TileAnalyzer() {
         super();
         inventory = new ItemStack[INVENTORY_SIZE];
+        setProgress(0);
+        setFuelLevel(0);
+    }
+
+    /**
+     * @return the progess
+     */
+    public int getProgress() {
+        return this.getInt("progress");
+    }
+
+    /**
+     * @param progess
+     *            the progess to set
+     */
+    public void setProgress(int progress) {
+        this.setInt("progress", progress);
+    }
+
+    /**
+     * @return the fuelLevel
+     */
+    public int getFuelLevel() {
+        return this.getInt("fuelLevel");
+    }
+
+    /**
+     * @param fuelLevel
+     *            the fuelLevel to set
+     */
+    public void setFuelLevel(int fuelLevel) {
+        this.setInt("fuelLevel", fuelLevel);
+    }
+
+    public int incrFuelLevel(int ammonites) {
+        int incr = 0;
+        int f10 = getFuelLevel() / 10;
+        if (f10 == 5) {
+            return 0;
+        } else if (f10 < 5) {
+            incr = 5 - f10;
+            if (ammonites < 5) {
+                if (incr > ammonites) {
+                    incr = ammonites;
+                }
+            }
+        }
+        setFuelLevel(getFuelLevel() + incr * 10);
+        return incr;
+    }
+
+    @Override
+    public void updateEntity() {
+        if (inventory[1] != null) {
+            int sizeBefore = getStackInSlot(1).stackSize;
+            int loss = incrFuelLevel(getStackInSlot(1).stackSize);
+            if (sizeBefore <= loss) {
+                setInventorySlotContents(1, null);
+            } else {
+                setInventorySlotContents(1, new ItemStack(ModItems.ammonite,
+                        sizeBefore - loss));
+            }
+        }
+
+        if (inventory[0] != null) {
+            this.setState((byte) 1);
+        } else {
+            this.setState((byte) 0);
+        }
     }
 
     @Override
@@ -43,6 +113,7 @@ public class TileAnalyzer extends TilePC implements IInventory {
     @Override
     public ItemStack decrStackSize(int slot, int amount) {
         ItemStack itemStack = getStackInSlot(slot);
+
         if (itemStack != null) {
             if (itemStack.stackSize <= amount) {
                 setInventorySlotContents(slot, null);
@@ -145,7 +216,8 @@ public class TileAnalyzer extends TilePC implements IInventory {
     }
 
     /**
-     * @param laserRotX the laserRotX to set
+     * @param laserRotX
+     *            the laserRotX to set
      */
     public void setLaserRotX(float laserRotX) {
         this.laserRotX = laserRotX;
@@ -159,7 +231,8 @@ public class TileAnalyzer extends TilePC implements IInventory {
     }
 
     /**
-     * @param laserRotZ the laserRotZ to set
+     * @param laserRotZ
+     *            the laserRotZ to set
      */
     public void setLaserRotZ(float laserRotZ) {
         this.laserRotZ = laserRotZ;

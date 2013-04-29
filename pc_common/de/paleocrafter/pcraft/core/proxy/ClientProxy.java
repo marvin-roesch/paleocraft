@@ -1,5 +1,7 @@
 package de.paleocrafter.pcraft.core.proxy;
 
+import java.util.HashMap;
+
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.ForgeDirection;
@@ -46,7 +48,8 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void handleTileEntityPacket(int x, int y, int z,
-            ForgeDirection orientation, byte state, String customName) {
+            ForgeDirection orientation, byte state, String customName,
+            HashMap<String, Integer> addIntegers) {
 
         TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld
                 .getBlockTileEntity(x, y, z);
@@ -56,6 +59,7 @@ public class ClientProxy extends CommonProxy {
                 ((TilePC) tileEntity).setOrientation(orientation);
                 ((TilePC) tileEntity).setState(state);
                 ((TilePC) tileEntity).setCustomName(customName);
+                ((TilePC) tileEntity).setAddIntegers(addIntegers);
             }
         }
     }

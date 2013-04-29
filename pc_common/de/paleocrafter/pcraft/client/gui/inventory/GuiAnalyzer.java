@@ -26,7 +26,7 @@ public class GuiAnalyzer extends GuiContainer {
 
     public GuiAnalyzer(InventoryPlayer player, TileAnalyzer tileAnalyzer) {
         super(new ContainerAnalyzer(player, tileAnalyzer));
-        ySize = 176;
+        ySize = 216;
         this.tileAnalyzer = tileAnalyzer;
     }
 
@@ -51,8 +51,12 @@ public class GuiAnalyzer extends GuiContainer {
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 
-        int progress = 10;
-        this.drawTexturedModalRect(xStart + 57, yStart + 37 + 21 - progress,
-                176, 21 - progress, 14, progress);
+        int fuelLevel = tileAnalyzer.getFuelLevel();
+        this.drawTexturedModalRect(xStart + 12, yStart + 41 + 50 - fuelLevel,
+                176, 50 - fuelLevel, 14, fuelLevel);
+
+        int progress = tileAnalyzer.getProgress();
+        this.drawTexturedModalRect(xStart + 49, yStart + 37 + 50 - progress,
+                190, 50 - progress, 14, progress);
     }
 }

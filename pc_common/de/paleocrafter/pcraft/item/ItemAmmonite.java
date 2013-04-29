@@ -1,12 +1,16 @@
 package de.paleocrafter.pcraft.item;
 
+import java.util.List;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.paleocrafter.pcraft.PaleoCraft;
 import de.paleocrafter.pcraft.lib.Reference;
 import de.paleocrafter.pcraft.lib.Strings;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 /**
  * PaleoCraft
@@ -24,6 +28,14 @@ public class ItemAmmonite extends Item {
         this.setMaxStackSize(64);
         this.setNoRepair();
         this.setUnlocalizedName(Strings.AMMONITE_ITEM_NAME);
+    }
+
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack is, EntityPlayer player, List list,
+            boolean advanced) {
+        list.add("Test");
     }
 
     @SideOnly(Side.CLIENT)

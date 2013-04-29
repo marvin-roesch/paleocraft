@@ -1,5 +1,7 @@
 package de.paleocrafter.pcraft.core.proxy;
 
+import java.util.HashMap;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -39,9 +41,9 @@ public class CommonProxy implements IGuiHandler {
     }
 
     public void registerTileEntities() {
-        GameRegistry.registerTileEntity(TileFossil.class, "tileFossil");
         GameRegistry.registerTileEntity(TileDinoEgg.class, "tileDinoEgg");
         GameRegistry.registerTileEntity(TileAnalyzer.class, "tileAnalyzer");
+        GameRegistry.registerTileEntity(TileFossil.class, "tileFossil");
     }
 
     public void sendRequestEventPacket(byte eventType, int originX,
@@ -51,7 +53,8 @@ public class CommonProxy implements IGuiHandler {
     }
 
     public void handleTileEntityPacket(int x, int y, int z,
-            ForgeDirection orientation, byte state, String customName) {
+            ForgeDirection orientation, byte state, String customName,
+            HashMap<String, Integer> addIntegers) {
 
     }
 

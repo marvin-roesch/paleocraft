@@ -1,9 +1,13 @@
 package de.paleocrafter.pcraft.tileentity;
 
+import java.util.HashMap;
+import java.util.Iterator;
+
 import de.paleocrafter.pcraft.lib.Strings;
 import de.paleocrafter.pcraft.network.PacketTypeHandler;
 import de.paleocrafter.pcraft.network.packet.PacketTileUpdate;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
@@ -21,11 +25,13 @@ public class TilePC extends TileEntity {
     private ForgeDirection orientation;
     private byte state;
     private String customName;
+    private HashMap<String, Integer> addIntegers;
 
     public TilePC() {
         orientation = ForgeDirection.SOUTH;
         state = 0;
         customName = "";
+        addIntegers = new HashMap<String, Integer>();
     }
 
     public ForgeDirection getOrientation() {
@@ -79,6 +85,19 @@ public class TilePC extends TileEntity {
         if (nbtTagCompound.hasKey(Strings.NBT_TE_NAME)) {
             customName = nbtTagCompound.getString(Strings.NBT_TE_NAME);
         }
+        
+        NBTTagCompound addition = nbtTagCompound.getCompoundTag("Addition");
+        addIntegers = new HashMap<String, Integer>();
+        int addCount = addition.getTags().size();
+        Object[] tagsRaw = addition.getTags().toArray();
+        NBTBase[] tags = new NBTBase[addCount];
+        for(int i = 0; i < addCount; i++) {
+            tags[i] = (NBTBase) tagsRaw[i];
+        }
+        for (int i = 0; i < addCount; i++) {
+            String key = tags[i].getName();
+            addIntegers.put(key, addition.getInteger(key));
+        }
     }
 
     @Override
@@ -92,12 +111,46 @@ public class TilePC extends TileEntity {
         if (this.hasCustomName()) {
             nbtTagCompound.setString(Strings.NBT_TE_NAME, customName);
         }
+        
+        NBTTagCompound addition = new NBTTagCompound();
+        
+        Iterator<Integer> tempVal = addIntegers.values().iterator();
+        String[] tempKey = addIntegers.keySet().toArray(new String[addIntegers.size()]);
+        for (int i = 0; tempVal.hasNext(); i++) {
+            int val = tempVal.next();
+            String key = tempKey[i];
+            addition.setInteger(key, val);
+        }
+        nbtTagCompound.setCompoundTag("Addition", addition);
     }
 
     @Override
     public Packet getDescriptionPacket() {
         return PacketTypeHandler.populatePacket(new PacketTileUpdate(xCoord,
-                yCoord, zCoord, orientation, state, customName));
+                yCoord, zCoord, orientation, state, customName, addIntegers));
     }
 
+    /**
+     * @return the addIntegers
+     */
+    public HashMap<String, Integer> getAddIntegers() {
+        return addIntegers;
+    }
+
+    /**
+     * @param addIntegers the addIntegers to set
+     */
+    public void setAddIntegers(HashMap<String, Integer> addIntegers) {
+        this.addIntegers = addIntegers;
+    }
+    
+    public int getInt(String key) {
+        if(addIntegers.containsKey(key))
+            return addIntegers.get(key);
+        return 0;
+    }
+
+    public void setInt(String key, int value) {
+        addIntegers.put(key, value);
+    }
 }

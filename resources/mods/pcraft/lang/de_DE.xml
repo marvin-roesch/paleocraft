@@ -6,7 +6,7 @@
 	<entry key="tile.dinoEgg.name">Dinoei</entry>
 	<entry key="block.ore.fossil.name">Fossil</entry>
 	<entry key="block.ore.ammonite.name">Ammonitenerz</entry>
-	<entry key="block.machines.analyzer.name">Analysierer</entry>
+	<entry key="block.machines.analyzer.name">Analysator</entry>
 	<entry key="item.ammonite.name">Ammonit</entry>
-	<entry key="container.analyzer">Analysierer</entry>
+	<entry key="container.analyzer">Analysator</entry>
 </properties>

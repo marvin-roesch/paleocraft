@@ -13,7 +13,6 @@ import de.paleocrafter.pcraft.tileentity.TileFossil;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -25,7 +24,7 @@ import net.minecraft.world.World;
 /**
  * PaleoCraft
  * 
- * BlockPC
+ * BlockOrePC
  * 
  * @author PaleoCrafter
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -47,29 +46,6 @@ public class BlockOrePC extends BlockPC {
         this.setStepSound(soundStoneFootstep);
         this.setCreativeTab(PaleoCraft.tabsPC);
         this.setUnlocalizedName(Strings.ORE_NAME);
-    }
-
-    @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z,
-            EntityLiving entity, ItemStack is) {
-        if (is.getItemDamage() == 0) {
-            TileFossil te = (TileFossil) world.getBlockTileEntity(x, y, z);
-            if (!te.isInitialized()) {
-                te.init();
-                world.markBlockForRenderUpdate(x, y, z);
-            }
-        }
-    }
-
-    @Override
-    public void onBlockAdded(World world, int x, int y, int z) {
-        TileFossil te = (TileFossil) world.getBlockTileEntity(x, y, z);
-        if (world.getBlockMetadata(x, y, z) == 0) {
-            if (!te.isInitialized()) {
-                te.init();
-                world.markBlockForRenderUpdate(x, y, z);
-            }
-        }
     }
 
     @Override
@@ -151,31 +127,43 @@ public class BlockOrePC extends BlockPC {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
         fosFront = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase()
-                + ":fossileFront");
+                + ":fossilFront");
         fosSides = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase()
-                + ":fossileSides");
+                + ":fossilSide");
         ammonite = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase()
                 + ":ammoniteBlock");
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public Icon getBlockTexture(IBlockAccess access, int x, int y, int z,
-            int side) {
-        switch (access.getBlockMetadata(x, y, z)) {
-            case 0:
-                TileFossil tileEntity = (TileFossil) access.getBlockTileEntity(
-                        x, y, z);
-                if (tileEntity != null) {
-                    if (side == tileEntity.getOrientation().ordinal()) {
-                        return fosFront;
-                    }
-                }
-                break;
-            case 1:
-                return ammonite;
+    public void onBlockAdded(World world, int x, int y, int z) {
+        super.onBlockAdded(world, x, y, z);
+        if (world.getBlockMetadata(x, y, z) == 0) {
+            TileFossil te = (TileFossil) world.getBlockTileEntity(x, y, z);
+            if (te != null) {
+                te.init();
+            }
+            world.setBlockTileEntity(x, y, z, te);
         }
-        return fosSides;
+
+        world.markBlockForUpdate(x, y, z);
+        world.markBlockForRenderUpdate(x, y, z);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Icon getBlockTexture(IBlockAccess world, int x, int y, int z,
+            int side) {
+        if (world.getBlockMetadata(x, y, z) == 0) {
+            TileFossil tileEntity = (TileFossil) world.getBlockTileEntity(x, y,
+                    z);
+            if (tileEntity != null) {
+                if (side == tileEntity.getOrientation().ordinal()) {
+                    return fosFront;
+                }
+            }
+            return fosSides;
+        }
+        return ammonite;
     }
 
     @Override
@@ -194,17 +182,15 @@ public class BlockOrePC extends BlockPC {
 
     @Override
     public TileEntity createTileEntity(World world, int meta) {
-        if (meta == 0) {
+        if (meta == 0)
             return new TileFossil();
-        }
         return null;
     }
 
     @Override
     public boolean hasTileEntity(int meta) {
-        if (meta == 0) {
+        if (meta == 0)
             return true;
-        }
         return false;
     }
 }
