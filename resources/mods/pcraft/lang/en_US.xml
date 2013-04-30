@@ -7,6 +7,7 @@
 	<entry key="block.ore.fossil.name">Fossil</entry>
 	<entry key="block.ore.ammonite.name">Ammonite Ore</entry>
 	<entry key="block.machines.analyzer.name">Analyzer</entry>
-	<entry key="item.ammonite.name">Ammonite</entry>
+	<entry key="item.genItem.fossil.name">Fossil</entry>
+	<entry key="item.genItem.ammonite.name">Ammonite</entry>
 	<entry key="container.analyzer">Analyzer</entry>
 </properties>

@@ -1,5 +1,6 @@
 package de.paleocrafter.pcraft.tileentity;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import de.paleocrafter.pcraft.item.ModItems;
 import de.paleocrafter.pcraft.lib.Strings;
 import net.minecraft.inventory.IInventory;
@@ -18,6 +19,7 @@ import net.minecraft.nbt.NBTTagList;
 public class TileAnalyzer extends TilePC implements IInventory {
     private float laserRotX;
     private float laserRotZ;
+    private int tickCount;
 
     private ItemStack[] inventory;
 
@@ -65,14 +67,17 @@ public class TileAnalyzer extends TilePC implements IInventory {
 
     public int incrFuelLevel(int ammonites) {
         int incr = 0;
-        int f10 = getFuelLevel() / 10;
-        if (f10 == 5) {
-            return 0;
-        } else if (f10 < 5) {
-            incr = 5 - f10;
-            if (ammonites < 5) {
-                if (incr > ammonites) {
-                    incr = ammonites;
+        int f10 = (int) Math.ceil(getFuelLevel() / 10);
+        if (getFuelLevel() <= 90) {
+            if (getFuelLevel() == 90) {
+                incr = 1;
+            }
+            if (getFuelLevel() < 90) {
+                incr = 9 - f10;
+                if (ammonites < 9) {
+                    if (incr > ammonites) {
+                        incr = ammonites;
+                    }
                 }
             }
         }
@@ -80,23 +85,73 @@ public class TileAnalyzer extends TilePC implements IInventory {
         return incr;
     }
 
+    public void incrProgress(int amount) {
+        this.setProgress(this.getProgress() + amount);
+
+        if (amount > 100 || this.getProgress() == 100) {
+            this.setProgress(100);
+        }
+    }
+
     @Override
     public void updateEntity() {
+        tickCount++;
         if (inventory[1] != null) {
             int sizeBefore = getStackInSlot(1).stackSize;
-            int loss = incrFuelLevel(getStackInSlot(1).stackSize);
+            int loss = incrFuelLevel(sizeBefore);
             if (sizeBefore <= loss) {
                 setInventorySlotContents(1, null);
             } else {
-                setInventorySlotContents(1, new ItemStack(ModItems.ammonite,
-                        sizeBefore - loss));
+                setInventorySlotContents(1, new ItemStack(ModItems.genItem,
+                        sizeBefore - loss, 1));
             }
         }
-
-        if (inventory[0] != null) {
-            this.setState((byte) 1);
-        } else {
-            this.setState((byte) 0);
+        if (!worldObj.isRemote) {
+            boolean hasToUpdate = false;
+            if (inventory[0] != null) {
+                if (getState() == 0)
+                    hasToUpdate = true;
+                setState((byte) 1);
+                if (inventory[0].stackTagCompound != null
+                        && inventory[0].stackTagCompound.hasKey("analyzed")
+                        && inventory[0].stackTagCompound.getBoolean("analyzed")) {
+                    setState((byte) 0);
+                    hasToUpdate = true;
+                    inventory[2] = inventory[0];
+                    inventory[0] = null;
+                } else {
+                    if (tickCount >= 20) {
+                        int progress = getProgress();
+                        if (progress == 100) {
+                            setProgress(0);
+                            ItemStack result = new ItemStack(ModItems.genItem,
+                                    1, 0);
+                            result.stackTagCompound = new NBTTagCompound();
+                            result.stackTagCompound
+                                    .setBoolean("analyzed", true);
+                            inventory[2] = result;
+                            inventory[0] = null;
+                            hasToUpdate = true;
+                        } else {
+                            if (getFuelLevel() >= 2) {
+                                incrProgress(1);
+                                this.setFuelLevel(this.getFuelLevel() - 2);
+                                hasToUpdate = true;
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (getState() == 1)
+                    hasToUpdate = true;
+                setState((byte) 0);
+                setProgress(0);
+            }
+            if (hasToUpdate)
+                PacketDispatcher.sendPacketToAllPlayers(getDescriptionPacket());
+        }
+        if (tickCount >= 20) {
+            tickCount = 0;
         }
     }
 

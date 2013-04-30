@@ -1,7 +1,8 @@
 package de.paleocrafter.pcraft.client.gui.inventory;
 
+import java.util.ArrayList;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.paleocrafter.pcraft.inventory.ContainerAnalyzer;
@@ -23,11 +24,47 @@ import net.minecraft.util.StatCollector;
 @SideOnly(Side.CLIENT)
 public class GuiAnalyzer extends GuiContainer {
     private TileAnalyzer tileAnalyzer;
+    private boolean showFuelTip;
 
     public GuiAnalyzer(InventoryPlayer player, TileAnalyzer tileAnalyzer) {
         super(new ContainerAnalyzer(player, tileAnalyzer));
         ySize = 216;
         this.tileAnalyzer = tileAnalyzer;
+    }
+
+    @Override
+    public void handleMouseInput() {
+        super.handleMouseInput();
+
+        int x = Mouse.getEventX() * this.width / this.mc.displayWidth;
+        int y = this.height - Mouse.getEventY() * this.height
+                / this.mc.displayHeight - 1;
+        int xStart = width / 2 - xSize / 2;
+        int yStart = height / 2 - ySize / 2;
+
+        int xPos = xStart + 12;
+        int yPos = yStart + 41;
+        int objWidth = 14;
+        int objHeight = 50;
+
+        if (x >= xPos && x <= (xPos + objWidth) && y >= yPos
+                && y <= (yPos + objHeight)) {
+            showFuelTip = true;
+        } else {
+            showFuelTip = false;
+        }
+    }
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @Override
+    public void drawScreen(int x, int y, float par3) {
+        super.drawScreen(x, y, par3);
+        if (showFuelTip) {
+            ArrayList text = new ArrayList();
+            text.add("Fuel:");
+            text.add(tileAnalyzer.getFuelLevel() + "/100");
+            this.drawHoveringText(text, x, y, fontRenderer);
+        }
     }
 
     @Override
@@ -51,12 +88,12 @@ public class GuiAnalyzer extends GuiContainer {
         int yStart = (height - ySize) / 2;
         this.drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 
-        int fuelLevel = tileAnalyzer.getFuelLevel();
+        int fuelLevel = (int) Math.floor(tileAnalyzer.getFuelLevel() / 2);
         this.drawTexturedModalRect(xStart + 12, yStart + 41 + 50 - fuelLevel,
                 176, 50 - fuelLevel, 14, fuelLevel);
 
-        int progress = tileAnalyzer.getProgress();
-        this.drawTexturedModalRect(xStart + 49, yStart + 37 + 50 - progress,
-                190, 50 - progress, 14, progress);
+        int progress = (int) Math.floor(tileAnalyzer.getProgress() / 2);
+        this.drawTexturedModalRect(xStart + 49, yStart + 37, 190, 0, 14,
+                progress);
     }
 }

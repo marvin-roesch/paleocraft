@@ -68,7 +68,7 @@ public class BlockOrePC extends BlockPC {
                             float dZ = z + rand.nextFloat() * 0.8F + 0.1F;
                             float factor = 0.05F;
                             EntityItem ent = new EntityItem(world, dX, dY, dZ,
-                                    new ItemStack(ModItems.ammonite, 1));
+                                    new ItemStack(ModItems.genItem, 1, 0));
                             ent.motionX = rand.nextGaussian() * factor;
                             ent.motionY = rand.nextGaussian() * factor + 0.2F;
                             ent.motionZ = rand.nextGaussian() * factor;
@@ -93,7 +93,7 @@ public class BlockOrePC extends BlockPC {
                     float dZ = z + rand.nextFloat() * 0.8F + 0.1F;
                     int quant = 1 + rand.nextInt(4);
                     EntityItem ent = new EntityItem(world, dX, dY, dZ,
-                            new ItemStack(ModItems.ammonite, quant));
+                            new ItemStack(ModItems.genItem, quant, 1));
                     float factor = 0.05F;
                     ent.motionX = rand.nextGaussian() * factor;
                     ent.motionY = rand.nextGaussian() * factor + 0.2F;

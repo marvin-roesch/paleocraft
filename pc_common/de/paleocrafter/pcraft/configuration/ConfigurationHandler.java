@@ -59,9 +59,9 @@ public class ConfigurationHandler {
             /* Block property configs */
 
             /* Item configs */
-            ItemIds.AMMONITE = configuration.getItem(Strings.AMMONITE_ITEM_NAME,
-                    ItemIds.AMMONITE_DEFAULT).getInt(
-                    ItemIds.AMMONITE_DEFAULT);
+            ItemIds.GENERAL = configuration.getItem(Strings.GENERAL_ITEM_NAME,
+                    ItemIds.GENERAL_DEFAULT).getInt(
+                    ItemIds.GENERAL_DEFAULT);
         } catch (Exception e) {
             FMLLog.log(Level.SEVERE, e, Reference.MOD_NAME
                     + " has had a problem loading its configuration");

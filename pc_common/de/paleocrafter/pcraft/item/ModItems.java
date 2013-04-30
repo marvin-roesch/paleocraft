@@ -14,11 +14,11 @@ import de.paleocrafter.pcraft.lib.Strings;
  */
 public class ModItems {
     /* Mod item instances */
-    public static ItemAmmonite ammonite;
+    public static ItemFossil genItem;
     
     public static void init() {
-        ammonite = new ItemAmmonite(ItemIds.AMMONITE);
+        genItem = new ItemFossil(ItemIds.GENERAL);
         
-        GameRegistry.registerItem(ammonite, Strings.AMMONITE_ITEM_NAME);
+        GameRegistry.registerItem(genItem, Strings.GENERAL_ITEM_NAME);
     }
 }

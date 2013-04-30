@@ -71,7 +71,7 @@ public class TileEntityMachineRenderer extends TileEntitySpecialRenderer {
 
         FMLClientHandler.instance().getClient().renderEngine
                 .bindTexture(Textures.MODEL_ANALYZER);
-        modelAnalyzer.renderAll(4);
+        modelAnalyzer.renderAll((int) Math.ceil(te.getProgress() / 10));
         if (te.getState() == 1) {
             FMLClientHandler.instance().getClient().renderEngine
                     .bindTexture(Textures.MODEL_LASER + "1.png");

@@ -1,10 +1,15 @@
 package de.paleocrafter.pcraft.inventory;
 
+import de.paleocrafter.pcraft.inventory.slot.SlotAnalyzerFuel;
+import de.paleocrafter.pcraft.inventory.slot.SlotAnalyzerInput;
+import de.paleocrafter.pcraft.inventory.slot.SlotAnalyzerResult;
+import de.paleocrafter.pcraft.item.ItemFossil;
 import de.paleocrafter.pcraft.tileentity.TileAnalyzer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 /**
  * PaleoCraft
@@ -22,7 +27,7 @@ public class ContainerAnalyzer extends Container {
             TileAnalyzer analyzer) {
 
         // Add the analyzer "to be analyzed" slot to the container
-        this.addSlotToContainer(new Slot(analyzer, 0, 48, 18));
+        this.addSlotToContainer(new SlotAnalyzerInput(analyzer, 0, 48, 18));
 
         // Add the analyzer fuel slot to the container
         this.addSlotToContainer(new SlotAnalyzerFuel(analyzer, 1, 11, 18));
@@ -52,5 +57,57 @@ public class ContainerAnalyzer extends Container {
     @Override
     public boolean canInteractWith(EntityPlayer player) {
         return true;
+    }
+
+    public ItemStack transferStackInSlot(EntityPlayer player, int slotId) {
+        ItemStack itemstack = null;
+        Slot slot = (Slot) this.inventorySlots.get(slotId);
+
+        if (slot != null && slot.getHasStack()) {
+            ItemStack is1 = slot.getStack();
+            itemstack = is1.copy();
+
+            if (slotId == 2) {
+                if (!this.mergeItemStack(is1, 3, 39, true)) {
+                    return null;
+                }
+
+                slot.onSlotChange(is1, itemstack);
+            } else if (slotId != 1 && slotId != 0) {
+                if (is1.getItem() instanceof ItemFossil
+                        && is1.getItemDamage() == 0) {
+                    if (!this.mergeItemStack(is1, 0, 1, false)) {
+                        return null;
+                    }
+                } else if (is1.getItem() instanceof ItemFossil) {
+                    if (!this.mergeItemStack(is1, 1, 2, false)) {
+                        return null;
+                    }
+                } else if (slotId >= 3 && slotId < 30) {
+                    if (!this.mergeItemStack(is1, 30, 39, false)) {
+                        return null;
+                    }
+                } else if (slotId >= 30 && slotId < 39
+                        && !this.mergeItemStack(is1, 3, 30, false)) {
+                    return null;
+                }
+            } else if (!this.mergeItemStack(is1, 3, 39, false)) {
+                return null;
+            }
+
+            if (is1.stackSize == 0) {
+                slot.putStack((ItemStack) null);
+            } else {
+                slot.onSlotChanged();
+            }
+
+            if (is1.stackSize == itemstack.stackSize) {
+                return null;
+            }
+
+            slot.onPickupFromSlot(player, is1);
+        }
+
+        return itemstack;
     }
 }

@@ -12,6 +12,7 @@ public class Strings {
     public static final String ANALYZER_NAME = "analyzer";
     
     /* Item name constants */
+    public static final String GENERAL_ITEM_NAME = "genItem";
     public static final String AMMONITE_ITEM_NAME = "ammonite";
     
     /* Inventory names */
