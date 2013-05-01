@@ -126,8 +126,8 @@ public class ModelAnalyzer extends ModelBase {
     }
     
     private void refreshProgress(int progress) {
-        if(progress > 7)
-            progress = 7;
+        if(progress > 10)
+            progress = 10;
         else if(progress < 0)
             progress = 0;
         Progress = new ModelRenderer(this, progress, 18);

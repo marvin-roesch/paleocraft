@@ -10,10 +10,18 @@ public class Strings {
     
     public static final String MACHINES_NAME = "machines";
     public static final String ANALYZER_NAME = "analyzer";
+    public static final String MICROSCOPE_NAME = "microscope";
     
     /* Item name constants */
     public static final String GENERAL_ITEM_NAME = "genItem";
     public static final String AMMONITE_ITEM_NAME = "ammonite";
+    
+    /* Hammer & chisel */
+    public static final String TOOL_NAME = "hAndC";
+    public static final String DIAMOND_NAME = "diamond";
+    public static final String IRON_NAME = "iron";
+    public static final String GOLD_NAME = "gold";
+    public static final String STONE_NAME = "stone";
     
     /* Inventory names */
     public static final String INV_NAME = "container.inventory";

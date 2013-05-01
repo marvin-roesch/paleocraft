@@ -7,7 +7,12 @@
 	<entry key="block.ore.fossil.name">Fossil</entry>
 	<entry key="block.ore.ammonite.name">Ammonitenerz</entry>
 	<entry key="block.machines.analyzer.name">Analysator</entry>
+	<entry key="block.machines.microscope.name">Mikroskop</entry>
 	<entry key="item.genItem.fossil.name">Fossil</entry>
 	<entry key="item.genItem.ammonite.name">Ammonit</entry>
+	<entry key="item.hAndC.diamond.name">Diamond Hammer &amp; Meisel</entry>
+	<entry key="item.hAndC.gold.name">Gold Hammer &amp; Meisel</entry>
+	<entry key="item.hAndC.iron.name">Iron Hammer &amp; Meisel</entry>
+	<entry key="item.hAndC.stone.name">Stone Hammer &amp; Meisel</entry>
 	<entry key="container.analyzer">Analysator</entry>
 </properties>

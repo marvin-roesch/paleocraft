@@ -9,6 +9,7 @@ import de.paleocrafter.pcraft.lib.GuiIds;
 import de.paleocrafter.pcraft.lib.RenderIds;
 import de.paleocrafter.pcraft.lib.Strings;
 import de.paleocrafter.pcraft.tileentity.TileAnalyzer;
+import de.paleocrafter.pcraft.tileentity.TileMicroscope;
 import de.paleocrafter.pcraft.tileentity.TilePC;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -16,7 +17,9 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -34,6 +37,31 @@ public class BlockMachines extends BlockPC {
         super(id, Material.iron);
         this.setCreativeTab(PaleoCraft.tabsPC);
         this.setUnlocalizedName(Strings.MACHINES_NAME);
+    }
+
+    @Override
+    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y,
+            int z) {
+        switch (world.getBlockMetadata(x, y, z)) {
+            case 0:
+                setBlockBounds(0, 0, 0, 1, 1, 1);
+                break;
+            case 1:
+                AxisAlignedBB bounds = null;
+                ForgeDirection dir = ((TilePC) world
+                        .getBlockTileEntity(x, y, z)).getOrientation();
+                if (dir == ForgeDirection.EAST || dir == ForgeDirection.WEST) {
+                    bounds = AxisAlignedBB.getBoundingBox(0.125D, 0, 0.1875D,
+                            0.875D, 1, 0.8125D);
+                } else {
+                    bounds = AxisAlignedBB.getBoundingBox(0.1875D, 0D, 0.125D,
+                            0.8125D, 1, 0.875D);
+                }
+                setBlockBounds((float) bounds.minX, (float) bounds.minY,
+                        (float) bounds.minZ, (float) bounds.maxX,
+                        (float) bounds.maxY, (float) bounds.maxZ);
+                break;
+        }
     }
 
     @Override
@@ -69,6 +97,7 @@ public class BlockMachines extends BlockPC {
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(int unknown, CreativeTabs tab, List subItems) {
         subItems.add(new ItemStack(this, 1, 0));
+        subItems.add(new ItemStack(this, 1, 1));
     }
 
     @Override
@@ -86,6 +115,8 @@ public class BlockMachines extends BlockPC {
         switch (meta) {
             case 0:
                 return new TileAnalyzer();
+            case 1:
+                return new TileMicroscope();
         }
         return null;
     }

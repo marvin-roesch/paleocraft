@@ -17,6 +17,7 @@ import de.paleocrafter.pcraft.lib.BlockIds;
 import de.paleocrafter.pcraft.lib.RenderIds;
 import de.paleocrafter.pcraft.tileentity.TileAnalyzer;
 import de.paleocrafter.pcraft.tileentity.TileDinoEgg;
+import de.paleocrafter.pcraft.tileentity.TileMicroscope;
 import de.paleocrafter.pcraft.tileentity.TilePC;
 
 public class ClientProxy extends CommonProxy {
@@ -41,6 +42,8 @@ public class ClientProxy extends CommonProxy {
         TileEntityMachineRenderer machineRender = new TileEntityMachineRenderer();
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileAnalyzer.class,
+                machineRender);
+        ClientRegistry.bindTileEntitySpecialRenderer(TileMicroscope.class,
                 machineRender);
         ClientRegistry.bindTileEntitySpecialRenderer(TileDinoEgg.class,
                 new TileEntityDinoEggRenderer());

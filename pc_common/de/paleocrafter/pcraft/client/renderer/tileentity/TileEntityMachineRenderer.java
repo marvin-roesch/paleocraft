@@ -8,9 +8,11 @@ import org.lwjgl.opengl.GL12;
 import cpw.mods.fml.client.FMLClientHandler;
 
 import de.paleocrafter.pcraft.client.model.ModelAnalyzer;
+import de.paleocrafter.pcraft.client.model.ModelMicroscope;
 import de.paleocrafter.pcraft.client.model.ModelFossil;
 import de.paleocrafter.pcraft.lib.Textures;
 import de.paleocrafter.pcraft.tileentity.TileAnalyzer;
+import de.paleocrafter.pcraft.tileentity.TileMicroscope;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -29,9 +31,11 @@ public class TileEntityMachineRenderer extends TileEntitySpecialRenderer {
     private float delta;
 
     private ModelAnalyzer modelAnalyzer;
+    private ModelMicroscope modelMicroscope;
 
     public TileEntityMachineRenderer() {
         modelAnalyzer = new ModelAnalyzer();
+        modelMicroscope = new ModelMicroscope();
     }
 
     @Override
@@ -41,6 +45,10 @@ public class TileEntityMachineRenderer extends TileEntitySpecialRenderer {
         if (te instanceof TileAnalyzer) {
             TileAnalyzer teAnalyzer = (TileAnalyzer) te;
             renderAnalyzer(teAnalyzer, x, y, z);
+        }
+        if (te instanceof TileMicroscope) {
+            TileMicroscope teMicroscope = (TileMicroscope) te;
+            renderMicroscope(teMicroscope, x, y, z);
         }
     }
 
@@ -74,7 +82,8 @@ public class TileEntityMachineRenderer extends TileEntitySpecialRenderer {
         modelAnalyzer.renderAll((int) Math.ceil(te.getProgress() / 10));
         if (te.getState() == 1) {
             FMLClientHandler.instance().getClient().renderEngine
-                    .bindTexture(Textures.MODEL_LASER + "1.png");
+                    .bindTexture(Textures.MODEL_LASER
+                            + ((int) Math.ceil(te.getProgress() / 10)) + ".png");
             ModelRenderer laser = new ModelRenderer(modelAnalyzer, 0, 0);
             laser.addBox(0F, 11F, 0F, 1, 12, 1);
             laser.setRotationPoint(0F, 0F, 0F);
@@ -111,13 +120,50 @@ public class TileEntityMachineRenderer extends TileEntitySpecialRenderer {
             setRotation(laser, te.getLaserRotX(), 0F, te.getLaserRotZ());
             laser.setTextureSize(64, 32);
             laser.mirror = true;
-            laser.render(0.0625F);
+            if (te.getFuelLevel() >= 2) {
+                laser.render(0.0625F);
+            }
             GL11.glTranslatef(0F, 0F, 0F);
             GL11.glScalef(0.25F, 0.25F, 0.25F);
             GL11.glRotatef(0.0F, 0.0F, 0.0F, 0.0F);
-            //new ModelFossil().render();
+            // new ModelFossil().render();
         }
-        
+
+        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+        GL11.glPopMatrix();
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+    }
+
+    private void renderMicroscope(TileMicroscope te, double x, double y,
+            double z) {
+        GL11.glPushMatrix();
+        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glTranslatef((float) x, (float) y + 2.0F, (float) z + 1.0F);
+        GL11.glScalef(1.0F, -1.0F, -1.0F);
+        GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+
+        ForgeDirection direction = te.getOrientation();
+        short angle = 0;
+
+        if (direction != null) {
+            if (direction == ForgeDirection.NORTH) {
+                angle = -90;
+            } else if (direction == ForgeDirection.SOUTH) {
+                angle = 90;
+            } else if (direction == ForgeDirection.WEST) {
+                angle = 180;
+            } else if (direction == ForgeDirection.EAST) {
+                angle = 0;
+            }
+        }
+
+        GL11.glRotatef(angle, 0.0F, 1.0F, 0.0F);
+
+        FMLClientHandler.instance().getClient().renderEngine
+                .bindTexture(Textures.MODEL_MICROSCOPE);
+        modelMicroscope.renderAll();
+
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPopMatrix();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

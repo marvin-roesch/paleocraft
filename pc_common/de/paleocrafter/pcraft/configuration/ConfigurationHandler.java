@@ -62,6 +62,9 @@ public class ConfigurationHandler {
             ItemIds.GENERAL = configuration.getItem(Strings.GENERAL_ITEM_NAME,
                     ItemIds.GENERAL_DEFAULT).getInt(
                     ItemIds.GENERAL_DEFAULT);
+            ItemIds.TOOL = configuration.getItem(Strings.TOOL_NAME,
+                    ItemIds.TOOL_DEFAULT).getInt(
+                    ItemIds.TOOL_DEFAULT);
         } catch (Exception e) {
             FMLLog.log(Level.SEVERE, e, Reference.MOD_NAME
                     + " has had a problem loading its configuration");

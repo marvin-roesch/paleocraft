@@ -11,5 +11,5 @@ package de.paleocrafter.pcraft.lib;
 public class Models {
     public static final String MODEL_LOCATION = "/mods/pcraft/models/";
     
-    public static final String FOSSIL = MODEL_LOCATION + "test.obj";
+    public static final String FOSSIL = MODEL_LOCATION + "fossil.obj";
 }

@@ -13,7 +13,8 @@ import net.minecraft.item.ItemStack;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class ItemBlockMachines extends ItemBlock {
-    private final static String[] subNames = { Strings.ANALYZER_NAME };
+    private final static String[] subNames = { Strings.ANALYZER_NAME,
+            Strings.MICROSCOPE_NAME };
 
     public ItemBlockMachines(int id) {
         super(id);
@@ -22,7 +23,8 @@ public class ItemBlockMachines extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack is) {
-        return "block." + Strings.MACHINES_NAME + "." + subNames[is.getItemDamage()];
+        return "block." + Strings.MACHINES_NAME + "."
+                + subNames[is.getItemDamage()];
     }
 
     @Override

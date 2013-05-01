@@ -8,6 +8,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.paleocrafter.pcraft.client.model.ModelAnalyzer;
+import de.paleocrafter.pcraft.client.model.ModelMicroscope;
 import de.paleocrafter.pcraft.lib.Textures;
 
 /**
@@ -21,9 +22,11 @@ import de.paleocrafter.pcraft.lib.Textures;
 @SideOnly(Side.CLIENT)
 public class ItemMachineRenderer implements IItemRenderer {
     private ModelAnalyzer modelAnalyzer;
+    private ModelMicroscope modelMicroscope;
 
     public ItemMachineRenderer() {
         modelAnalyzer = new ModelAnalyzer();
+        modelMicroscope = new ModelMicroscope();
     }
 
     @Override
@@ -42,18 +45,36 @@ public class ItemMachineRenderer implements IItemRenderer {
 
         switch (type) {
             case ENTITY: {
-                if (item.getItemDamage() == 0)
-                    renderAnalyzer(0.5F, 1.0F, 0.5F);
+                switch (item.getItemDamage()) {
+                    case 0:
+                        renderAnalyzer(0.5F, 1.0F, 0.5F);
+                        break;
+                    case 1:
+                        renderMicroscope(0.5F, 1.0F, 0.5F);
+                        break;
+                }
                 break;
             }
             case EQUIPPED: {
-                if (item.getItemDamage() == 0)
-                    renderAnalyzer(0.5F, 1.5F, 0.5F);
+                switch (item.getItemDamage()) {
+                    case 0:
+                        renderAnalyzer(0.5F, 1.5F, 0.5F);
+                        break;
+                    case 1:
+                        renderMicroscope(0.5F, 1.5F, 0.5F);
+                        break;
+                }
                 break;
             }
             case INVENTORY: {
-                if (item.getItemDamage() == 0)
-                    renderAnalyzer(0.0F, 1.0F, 0.0F);
+                switch (item.getItemDamage()) {
+                    case 0:
+                        renderAnalyzer(0.0F, 1.0F, 0.0F);
+                        break;
+                    case 1:
+                        renderMicroscope(0.0F, 1.0F, 0.0F);
+                        break;
+                }
                 break;
             }
             default:
@@ -70,6 +91,18 @@ public class ItemMachineRenderer implements IItemRenderer {
         GL11.glRotatef(180, 1, 0, 0);
         GL11.glRotatef(90, 0, 1, 0);
         modelAnalyzer.renderAll(0);
+        GL11.glPopMatrix(); // end
+    }
+
+    private void renderMicroscope(float x, float y, float z) {
+
+        FMLClientHandler.instance().getClient().renderEngine
+                .bindTexture(Textures.MODEL_MICROSCOPE);
+        GL11.glPushMatrix(); // start
+        GL11.glTranslatef(x, y, z); // size
+        GL11.glRotatef(180, 1, 0, 0);
+        GL11.glRotatef(90, 0, 1, 0);
+        modelMicroscope.renderAll();
         GL11.glPopMatrix(); // end
     }
 }

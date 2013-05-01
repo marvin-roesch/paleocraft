@@ -16,6 +16,8 @@ public class Textures {
 
     public static final String MODEL_ANALYZER = MODEL_TEXTURE_LOC
             + "analyzer.png";
+    public static final String MODEL_MICROSCOPE = MODEL_TEXTURE_LOC
+            + "microscope.png";
     public static final String MODEL_LASER = MODEL_TEXTURE_LOC + "analaser/";
     public static final String MODEL_EGG = MODEL_TEXTURE_LOC + "egg.png";
 

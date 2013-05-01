@@ -10,8 +10,10 @@ package de.paleocrafter.pcraft.lib;
  */
 public class ItemIds {
     /* Default item ids */
-    public static final int GENERAL_DEFAULT = 3220;
+    public static final int GENERAL_DEFAULT = 20220;
+    public static final int TOOL_DEFAULT = 20221;
     
     /* Custom IDs */
     public static int GENERAL;
+    public static int TOOL;
 }

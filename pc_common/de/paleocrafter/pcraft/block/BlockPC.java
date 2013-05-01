@@ -19,6 +19,7 @@ public class BlockPC extends BlockContainer {
 
     public BlockPC(int id, Material mat) {
         super(id, mat);
+        this.setHardness(2);
     }
 
     @Override

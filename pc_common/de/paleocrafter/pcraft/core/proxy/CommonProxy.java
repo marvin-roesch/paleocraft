@@ -13,6 +13,7 @@ import de.paleocrafter.pcraft.lib.GuiIds;
 import de.paleocrafter.pcraft.tileentity.TileAnalyzer;
 import de.paleocrafter.pcraft.tileentity.TileDinoEgg;
 import de.paleocrafter.pcraft.tileentity.TileFossil;
+import de.paleocrafter.pcraft.tileentity.TileMicroscope;
 
 public class CommonProxy implements IGuiHandler {
 
@@ -43,6 +44,7 @@ public class CommonProxy implements IGuiHandler {
     public void registerTileEntities() {
         GameRegistry.registerTileEntity(TileDinoEgg.class, "tileDinoEgg");
         GameRegistry.registerTileEntity(TileAnalyzer.class, "tileAnalyzer");
+        GameRegistry.registerTileEntity(TileMicroscope.class, "tileMicroscope");
         GameRegistry.registerTileEntity(TileFossil.class, "tileFossil");
     }
 

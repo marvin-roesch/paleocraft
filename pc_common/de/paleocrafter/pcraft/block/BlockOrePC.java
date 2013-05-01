@@ -6,6 +6,7 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import de.paleocrafter.pcraft.PaleoCraft;
+import de.paleocrafter.pcraft.item.ItemToolPC;
 import de.paleocrafter.pcraft.item.ModItems;
 import de.paleocrafter.pcraft.lib.Reference;
 import de.paleocrafter.pcraft.lib.Strings;
@@ -62,7 +63,7 @@ public class BlockOrePC extends BlockPC {
             switch (world.getBlockMetadata(x, y, z)) {
                 case 0:
                     if (p.getHeldItem() != null) {
-                        if (p.getHeldItem().itemID == 278) {
+                        if (p.getHeldItem().getItem() instanceof ItemToolPC) {
                             float dX = x + rand.nextFloat() * 0.8F + 0.1F;
                             float dY = y + rand.nextFloat() * 0.8F + 0.1F;
                             float dZ = z + rand.nextFloat() * 0.8F + 0.1F;
@@ -73,6 +74,7 @@ public class BlockOrePC extends BlockPC {
                             ent.motionY = rand.nextGaussian() * factor + 0.2F;
                             ent.motionZ = rand.nextGaussian() * factor;
                             world.spawnEntityInWorld(ent);
+                            //((ItemToolPC) p.getHeldItem());
                         } else {
                             float dX = x + rand.nextFloat() * 0.8F + 0.1F;
                             float dY = y + rand.nextFloat() * 0.8F + 0.1F;
@@ -138,15 +140,14 @@ public class BlockOrePC extends BlockPC {
     public void onBlockAdded(World world, int x, int y, int z) {
         super.onBlockAdded(world, x, y, z);
         if (world.getBlockMetadata(x, y, z) == 0) {
-            TileFossil te = (TileFossil) world.getBlockTileEntity(x, y, z);
-            if (te != null) {
-                te.init();
+            if (!world.isRemote) {
+                TileFossil te = (TileFossil) world.getBlockTileEntity(x, y, z);
+                if (te != null) {
+                    te.init();
+                }
             }
-            world.setBlockTileEntity(x, y, z, te);
+            world.markBlockForUpdate(x, y, z);
         }
-
-        world.markBlockForUpdate(x, y, z);
-        world.markBlockForRenderUpdate(x, y, z);
     }
 
     @Override
