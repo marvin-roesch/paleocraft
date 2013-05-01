@@ -35,6 +35,7 @@ public class TileEntityDinoEggRenderer extends TileEntitySpecialRenderer {
         GL11.glTranslatef((float) x, (float) y + 2.0F, (float) z + 1.0F);
         GL11.glScalef(1.0F, -1.0F, -1.0F);
         GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+        GL11.glColor4f(0.9F, 1.0F, 1.0F, 1.0F);
 
         GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F);
 

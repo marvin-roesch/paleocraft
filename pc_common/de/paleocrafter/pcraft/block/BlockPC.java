@@ -21,7 +21,7 @@ public class BlockPC extends BlockContainer {
         super(id, mat);
         this.setHardness(2);
     }
-
+    
     @Override
     public void registerIcons(IconRegister reg) {
         blockIcon = reg.registerIcon(Reference.MOD_ID.toLowerCase() + ":"

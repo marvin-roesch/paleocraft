@@ -55,7 +55,7 @@ public class ItemToolPC extends ItemTool {
     public boolean isItemTool(ItemStack stack) {
         return true;
     }
-    
+
     @Override
     public int getMaxDamage() {
         switch (EnumToolMaterial.valueOf(this.getToolMaterialName())) {
@@ -86,6 +86,21 @@ public class ItemToolPC extends ItemTool {
 
     public static String getName(int id) {
         return "item." + Strings.TOOL_NAME + "." + subNames[id];
+    }
+
+    public int getPercentage() {
+        switch (EnumToolMaterial.valueOf(this.getToolMaterialName())) {
+            case STONE:
+                return 50;
+            case GOLD:
+                return 40;
+            case IRON:
+                return 75;
+            case EMERALD:
+                return 90;
+            default:
+                return 0;
+        }
     }
 
 }

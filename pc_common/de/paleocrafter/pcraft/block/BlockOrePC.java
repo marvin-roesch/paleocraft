@@ -73,8 +73,12 @@ public class BlockOrePC extends BlockPC {
                             ent.motionX = rand.nextGaussian() * factor;
                             ent.motionY = rand.nextGaussian() * factor + 0.2F;
                             ent.motionZ = rand.nextGaussian() * factor;
-                            world.spawnEntityInWorld(ent);
-                            //((ItemToolPC) p.getHeldItem());
+                            ItemToolPC heldItem = (ItemToolPC) p.getHeldItem()
+                                    .getItem();
+                            int perc = rand.nextInt(100);
+                            if (perc <= heldItem.getPercentage())
+                                world.spawnEntityInWorld(ent);
+
                         } else {
                             float dX = x + rand.nextFloat() * 0.8F + 0.1F;
                             float dY = y + rand.nextFloat() * 0.8F + 0.1F;

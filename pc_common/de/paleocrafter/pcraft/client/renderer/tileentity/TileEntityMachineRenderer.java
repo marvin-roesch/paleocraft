@@ -123,10 +123,12 @@ public class TileEntityMachineRenderer extends TileEntitySpecialRenderer {
             if (te.getFuelLevel() >= 2) {
                 laser.render(0.0625F);
             }
-            GL11.glTranslatef(0F, 0F, 0F);
-            GL11.glScalef(0.25F, 0.25F, 0.25F);
-            GL11.glRotatef(0.0F, 0.0F, 0.0F, 0.0F);
-            // new ModelFossil().render();
+            FMLClientHandler.instance().getClient().renderEngine
+                    .bindTexture(Textures.MODEL_FOSSIL);
+            GL11.glTranslatef(-0.475F, 1.42F, 0.165F);
+            GL11.glScalef(0.08F, 0.08F, 0.08F);
+            GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
+            new ModelFossil().render();
         }
 
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
