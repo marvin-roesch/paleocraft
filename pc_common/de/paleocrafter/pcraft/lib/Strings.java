@@ -16,6 +16,12 @@ public class Strings {
     public static final String GENERAL_ITEM_NAME = "genItem";
     public static final String AMMONITE_ITEM_NAME = "ammonite";
     
+    public static final String ARMOR_NAME = "paleoArmor";
+    public static final String ARMOR_HELMET_NAME = "helmet";
+    public static final String ARMOR_CHEST_NAME = "chest";
+    public static final String ARMOR_LEGGINGS_NAME = "leggings";
+    public static final String ARMOR_BOOTS_NAME = "boots";
+    
     /* Hammer & chisel */
     public static final String TOOL_NAME = "hAndC";
     public static final String DIAMOND_NAME = "diamond";
@@ -26,6 +32,7 @@ public class Strings {
     /* Inventory names */
     public static final String INV_NAME = "container.inventory";
     public static final String INV_ANALYZER_NAME = "container.analyzer";
+    public static final String FOSSINERGY_NAME = "names.fossinergy";
     
     /* Tile Entity NBT keys */
     public static final String NBT_TE_DIRECTION = "orientation";

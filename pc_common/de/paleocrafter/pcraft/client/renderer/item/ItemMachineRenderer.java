@@ -3,6 +3,7 @@ package de.paleocrafter.pcraft.client.renderer.item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -61,7 +62,7 @@ public class ItemMachineRenderer implements IItemRenderer {
                         renderAnalyzer(0.5F, 1.5F, 0.5F);
                         break;
                     case 1:
-                        renderMicroscope(0.5F, 1.5F, 0.5F);
+                        renderMicroscope(0.5F, 2.0F, 0.5F);
                         break;
                 }
                 break;
@@ -99,10 +100,12 @@ public class ItemMachineRenderer implements IItemRenderer {
         FMLClientHandler.instance().getClient().renderEngine
                 .bindTexture(Textures.MODEL_MICROSCOPE);
         GL11.glPushMatrix(); // start
+        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glTranslatef(x, y, z); // size
+        GL11.glScalef(0.5F, 0.5F, 0.5F);
         GL11.glRotatef(180, 1, 0, 0);
-        GL11.glRotatef(90, 0, 1, 0);
         modelMicroscope.renderAll();
+        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPopMatrix(); // end
     }
 }

@@ -61,7 +61,8 @@ public class GuiAnalyzer extends GuiContainer {
         super.drawScreen(x, y, par3);
         if (showFuelTip) {
             ArrayList text = new ArrayList();
-            text.add("Fuel:");
+            text.add(StatCollector.translateToLocal(Strings.FOSSINERGY_NAME)
+                    + ":");
             text.add(tileAnalyzer.getFuelLevel() + "/100");
             this.drawHoveringText(text, x, y, fontRenderer);
         }

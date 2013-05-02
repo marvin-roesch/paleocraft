@@ -14,5 +14,10 @@
 	<entry key="item.hAndC.gold.name">Gold Hammer &amp; Chisel</entry>
 	<entry key="item.hAndC.iron.name">Iron Hammer &amp; Chisel</entry>
 	<entry key="item.hAndC.stone.name">Stone Hammer &amp; Chisel</entry>
+	<entry key="item.paleoArmor.helmet.name">Paleontologist's Hat</entry>
+	<entry key="item.paleoArmor.chest.name">Paleontologist's West</entry>
+	<entry key="item.paleoArmor.leggings.name">Paleontologist's Leggings</entry>
+	<entry key="item.paleoArmor.boots.name">Paleontologist's Boots</entry>
 	<entry key="container.analyzer">Analyzer</entry>
+	<entry key="names.fossinergy">Fossinergy</entry>
 </properties>

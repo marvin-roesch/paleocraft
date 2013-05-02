@@ -16,10 +16,16 @@ import de.paleocrafter.pcraft.lib.Strings;
 public class ModItems {
     /* Mod item instances */
     public static ItemFossil genItem;
+    
     public static ItemToolPC toolStone;
     public static ItemToolPC toolGold;
     public static ItemToolPC toolIron;
     public static ItemToolPC toolDiamond;
+    
+    public static ItemArmorPaleo armorHelmet;
+    public static ItemArmorPaleo armorChest;
+    public static ItemArmorPaleo armorLeggings;
+    public static ItemArmorPaleo armorBoots;
 
     public static void init() {
         genItem = new ItemFossil(ItemIds.GENERAL);
@@ -31,11 +37,20 @@ public class ModItems {
                 ItemToolPC.getName(2), "hcIron");
         toolDiamond = new ItemToolPC(ItemIds.TOOL + 3,
                 EnumToolMaterial.EMERALD, ItemToolPC.getName(0), "hcDiamond");
+        armorHelmet = new ItemArmorPaleo(ItemIds.ARMOR, 3, 0);
+        armorChest = new ItemArmorPaleo(ItemIds.ARMOR + 1, 3, 1);
+        armorLeggings = new ItemArmorPaleo(ItemIds.ARMOR + 2, 3, 2);
+        armorBoots = new ItemArmorPaleo(ItemIds.ARMOR + 3, 3, 3);
 
         GameRegistry.registerItem(genItem, Strings.GENERAL_ITEM_NAME);
         GameRegistry.registerItem(toolStone, ItemToolPC.getName(3));
         GameRegistry.registerItem(toolGold, ItemToolPC.getName(1));
         GameRegistry.registerItem(toolIron, ItemToolPC.getName(2));
         GameRegistry.registerItem(toolDiamond, ItemToolPC.getName(0));
+        
+        GameRegistry.registerItem(armorHelmet, armorHelmet.getUnlocalizedName());
+        GameRegistry.registerItem(armorChest, armorChest.getUnlocalizedName());
+        GameRegistry.registerItem(armorLeggings, armorLeggings.getUnlocalizedName());
+        GameRegistry.registerItem(armorBoots, armorBoots.getUnlocalizedName());
     }
 }
