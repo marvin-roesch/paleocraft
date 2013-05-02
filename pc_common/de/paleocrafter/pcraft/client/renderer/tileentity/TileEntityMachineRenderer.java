@@ -85,19 +85,19 @@ public class TileEntityMachineRenderer extends TileEntitySpecialRenderer {
                     .bindTexture(Textures.MODEL_LASER
                             + ((int) Math.ceil(te.getProgress() / 10)) + ".png");
             ModelRenderer laser = new ModelRenderer(modelAnalyzer, 0, 0);
-            laser.addBox(0F, 11F, 0F, 1, 12, 1);
+            laser.addBox(-0.5F, 12.5F, -0.5F, 1, 10, 1);
             laser.setRotationPoint(0F, 0F, 0F);
             if (delta >= 0.9F) {
                 Random rand = new Random();
                 float val = 1F;
                 float rotX = 0;
                 float rotZ = 0;
-                while (val > 0.1F) {
+                while (val > 0.07F) {
                     val = rand.nextFloat();
                 }
                 rotX = val;
                 val = 1F;
-                while (val > 0.1F) {
+                while (val > 0.09F) {
                     val = rand.nextFloat();
                 }
                 rotZ = val;

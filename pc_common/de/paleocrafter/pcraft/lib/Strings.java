@@ -29,6 +29,10 @@ public class Strings {
     public static final String GOLD_NAME = "gold";
     public static final String STONE_NAME = "stone";
     
+    /* Crafting materials */
+    public static final String CRAFTING_NAME = "pcCrafting";
+    public static final String LASER_NAME = "laser";
+    
     /* Inventory names */
     public static final String INV_NAME = "container.inventory";
     public static final String INV_ANALYZER_NAME = "container.analyzer";

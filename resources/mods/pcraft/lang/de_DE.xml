@@ -18,6 +18,7 @@
 	<entry key="item.paleoArmor.chest.name">Weste des Paläontologen</entry>
 	<entry key="item.paleoArmor.leggings.name">Hosen des Paläontologen</entry>
 	<entry key="item.paleoArmor.boots.name">Stiefel des Paläontologen</entry>
+	<entry key="item.pcCrafting.laser.name">Laser</entry>
 	<entry key="container.analyzer">Analysator</entry>
 	<entry key="names.fossinergy">Fossinergie</entry>
 </properties>

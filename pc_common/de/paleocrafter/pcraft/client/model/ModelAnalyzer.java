@@ -17,6 +17,7 @@ public class ModelAnalyzer extends ModelBase {
     ModelRenderer Pane4;
     ModelRenderer Controls;
     ModelRenderer LaserBase;
+    ModelRenderer LaserBit;
     ModelRenderer Progress;
 
     public ModelAnalyzer() {
@@ -99,6 +100,13 @@ public class ModelAnalyzer extends ModelBase {
         LaserBase.setTextureSize(64, 64);
         LaserBase.mirror = true;
         setRotation(LaserBase, 0F, 0F, 0F);
+        LaserBit = new ModelRenderer(this, 0, 5);
+        LaserBit.addBox(-1F, 1F, -1F, 2, 2, 2);
+        LaserBit.setRotationPoint(0F, 0F, 0F);
+        LaserBit.setTextureSize(64, 64);
+        LaserBit.mirror = true;
+        setRotation(LaserBit, 0F, 0F, 0F);
+        LaserBase.addChild(LaserBit);
         Progress = new ModelRenderer(this, 4, 18);
         Progress.addBox(0F, 0F, 0F, 1, 10, 1);
         Progress.setRotationPoint(-4F, 11F, 6F);
